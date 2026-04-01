@@ -1,5 +1,7 @@
 import type { BookingFormData, BookingStep } from "../types/booking";
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export const initialBookingFormData: BookingFormData = {
   fullName: "",
   email: "",
@@ -22,6 +24,8 @@ export const bookingSteps: BookingStep[] = [
 
       if (!data.email.trim()) {
         errors.email = "Email is required";
+      } else if (!emailPattern.test(data.email.trim())) {
+        errors.email = "Please enter a valid email address";
       }
 
       return errors;
